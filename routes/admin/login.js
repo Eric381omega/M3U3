@@ -26,13 +26,15 @@ router.post('/', async (req, res, next) => {
         (usuario, password);
 
         if (data != undefined) {
-            res.session.id_usuario = data.id;
+            console.log('loggeo exitoso');
+            req.session.id_usuario = data.id;
             req.session.nombre = data.usuario;
             res.redirect('/admin/novedades');
         } else {
+            console.log('no encontro usuario');
             res.render('admin/login', {
                 layout: 'admin/layout',
-                Error: true
+                error: true
             })
         }
     } catch (error) {

@@ -1,14 +1,24 @@
 var express = require('express');
 var router = express.Router();
-
 var nodemailer = require('nodemailer');
+var novedadesModel = require('../models/novedadesModel');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
+/* GET home page. revisar el codigo de arriba */ 
+
+router.get('/', async function(req, res, next) {
+  var novedades = await novedadesModel.getNovedades();
+  
+  res.render('index', {
+    novedades
+  });
 });
 
-router.post('/', async (req, res, next) => {
+
+module.exports = router;
+
+//en caso de correciones revisar el codigo de arriba
+
+/*router.post('/', async (req, res, next) => {
 
   var nombre = req.body.nombre;
   var apellido = req.body.apellido;
@@ -46,4 +56,5 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+*/
+

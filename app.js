@@ -14,7 +14,7 @@ var adminRouter = require('./routes/admin/novedades');
 
 var app = express();
 
-//M3U4###
+/*
 
 const { title } = require('process');
 
@@ -48,7 +48,7 @@ app.get('/salir', function (req, res) {
  res.redirect('/');
 });
 
-//M3U4^^^
+//M3U4^^^ */
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -68,11 +68,14 @@ app.use(session({
 
  secured = async (req, res, next) => {
   try {
+    console.log('ruta segura');
     console.log(req.session.id_usuario);
-    if (req.session.id_usuario) {
+    if (req.session.id_usuario != undefined) {
+      console.log('usuario loggeado');
       next();
     } else {
-      res.redirect('admin/login')
+      console.log('sesion vacia, volviendo al Login');
+      res.redirect('/admin/login')
     }
   } catch (error) {
      console.log(error);
